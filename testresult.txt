@@ -1,0 +1,61 @@
+
+$insmod kello.ko
+---dmesg---
+[53894.342214] Creating my own thread
+[53894.342321] Thread is created sucssfully
+[53894.342325] mythread_func is called
+
+$rmmod kello
+---dmesg---
+
+[53984.879936]  snd_seq crct10dif_pclmul dell_wmi ecdh_generic crc32_pclmul sparse_keymap joydev ecc ghash_clmulni_intel iTCO_wdt pcspkr mei_hdcp snd_seq_device snd_pcm iTCO_vendor_support snd_timer snd dw_dmac soundcore i2c_i801 intel_cstate intel_uncore intel_rapl_perf dell_smbios dcdbas wmi_bmof dell_wmi_descriptor mei_me dell_rbtn mei lpc_ich rfkill i915 rtsx_usb_sdmmc mmc_core hid_rmi rmi_core rtsx_usb i2c_algo_bit cec drm_kms_helper drm crc32c_intel serio_raw r8169 wmi video i2c_hid pinctrl_lynxpoint [last unloaded: hello]
+[53984.879976] CPU: 1 PID: 13265 Comm: rmmod Tainted: P           OE     5.6.13-100.fc30.x86_64 #1
+[53984.879978] Hardware name: Dell Inc. Inspiron 3542/0KHNVP, BIOS A08 07/13/2015
+[53984.879984] RIP: 0010:refcount_warn_saturate+0x68/0xf0
+[53984.879988] Code: 05 85 1a 31 01 01 e8 a9 b1 bd ff 0f 0b c3 80 3d 75 1a 31 01 00 75 d3 48 c7 c7 18 1d 3d 87 c6 05 65 1a 31 01 01 e8 8a b1 bd ff <0f> 0b c3 80 3d 58 1a 31 01 00 75 b4 48 c7 c7 f0 1c 3d 87 c6 05 48
+[53984.879991] RSP: 0018:ffffb403c322beb0 EFLAGS: 00010282
+[53984.879993] RAX: 000000000000002a RBX: 00000000000000b0 RCX: 0000000000000007
+[53984.879996] RDX: 0000000000000007 RSI: 0000000000000086 RDI: ffff8bc19ba99cc0
+[53984.879998] RBP: ffff8bc195a58000 R08: 0000000000000627 R09: 0000000000000003
+[53984.879999] R10: 0000000000000000 R11: 0000000000000001 R12: ffff8bc195a58020
+[53984.880001] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+[53984.880004] FS:  00007fcaf4c602c0(0000) GS:ffff8bc19ba80000(0000) knlGS:0000000000000000
+[53984.880007] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[53984.880009] CR2: 00005623d09b4008 CR3: 00000000b74be004 CR4: 00000000001606e0
+[53984.880011] Call Trace:
+[53984.880023]  kthread_stop+0x168/0x170
+[53984.880036]  cleanup_module+0x1a/0x2b [hello]
+[53984.880043]  ? __x64_sys_delete_module+0x13d/0x2a0
+[53984.880050]  ? exit_to_usermode_loop+0xc7/0x130
+[53984.880056]  ? do_syscall_64+0x5b/0x1c0
+[53984.880063]  ? entry_SYSCALL_64_after_hwframe+0x44/0xa9
+[53984.880069] ---[ end trace dbc9daae6a0de776 ]---
+[53984.880072] ------------[ cut here ]------------
+[53984.880073] refcount_t: underflow; use-after-free.
+[53984.880093] WARNING: CPU: 1 PID: 13265 at lib/refcount.c:28 refcount_warn_saturate+0xa6/0xf0
+[53984.880094] Modules linked in: hello(POE-) uas usb_storage fuse rfcomm nf_conntrack_netbios_ns nf_conntrack_broadcast xt_CT ip6t_rpfilter ip6t_REJECT nf_reject_ipv6 ipt_REJECT nf_reject_ipv4 xt_conntrack ebtable_nat ip6table_nat ip6table_mangle ip6table_raw ip6table_security iptable_nat nf_nat iptable_mangle iptable_raw iptable_security nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 libcrc32c ccm ip_set nfnetlink ebtable_filter ebtables ip6table_filter ip6_tables iptable_filter ip_tables cmac bnep sunrpc vfat fat ath9k ath9k_common ath9k_hw uvcvideo mac80211 videobuf2_vmalloc intel_rapl_msr intel_rapl_common videobuf2_memops videobuf2_v4l2 x86_pkg_temp_thermal videobuf2_common ath intel_powerclamp rtsx_usb_ms videodev cfg80211 ath3k btusb coretemp btrtl btbcm kvm_intel mc btintel memstick snd_hda_codec_realtek snd_hda_codec_generic dell_laptop bluetooth ledtrig_audio snd_hda_codec_hdmi libarc4 kvm snd_hda_intel snd_intel_dspcfg snd_hda_codec irqbypass snd_hda_core dell_smm_hwmon snd_hwdep
+[53984.880136]  snd_seq crct10dif_pclmul dell_wmi ecdh_generic crc32_pclmul sparse_keymap joydev ecc ghash_clmulni_intel iTCO_wdt pcspkr mei_hdcp snd_seq_device snd_pcm iTCO_vendor_support snd_timer snd dw_dmac soundcore i2c_i801 intel_cstate intel_uncore intel_rapl_perf dell_smbios dcdbas wmi_bmof dell_wmi_descriptor mei_me dell_rbtn mei lpc_ich rfkill i915 rtsx_usb_sdmmc mmc_core hid_rmi rmi_core rtsx_usb i2c_algo_bit cec drm_kms_helper drm crc32c_intel serio_raw r8169 wmi video i2c_hid pinctrl_lynxpoint [last unloaded: hello]
+[53984.880165] CPU: 1 PID: 13265 Comm: rmmod Tainted: P        W  OE     5.6.13-100.fc30.x86_64 #1
+[53984.880167] Hardware name: Dell Inc. Inspiron 3542/0KHNVP, BIOS A08 07/13/2015
+[53984.880171] RIP: 0010:refcount_warn_saturate+0xa6/0xf0
+[53984.880174] Code: 05 48 1a 31 01 01 e8 6b b1 bd ff 0f 0b c3 80 3d 36 1a 31 01 00 75 95 48 c7 c7 48 1d 3d 87 c6 05 26 1a 31 01 01 e8 4c b1 bd ff <0f> 0b c3 80 3d 15 1a 31 01 00 0f 85 72 ff ff ff 48 c7 c7 a0 1d 3d
+[53984.880176] RSP: 0018:ffffb403c322beb0 EFLAGS: 00010282
+[53984.880179] RAX: 0000000000000026 RBX: ffff8bc1905272a0 RCX: 0000000000000007
+[53984.880181] RDX: 0000000000000007 RSI: 0000000000000086 RDI: ffff8bc19ba99cc0
+[53984.880183] RBP: ffff8bc195a58000 R08: 0000000000000641 R09: 0000000000000003
+[53984.880185] R10: 0000000000000000 R11: 0000000000000001 R12: ffff8bc195a58020
+[53984.880186] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+[53984.880189] FS:  00007fcaf4c602c0(0000) GS:ffff8bc19ba80000(0000) knlGS:0000000000000000
+[53984.880191] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[53984.880193] CR2: 00005623d09b4008 CR3: 00000000b74be004 CR4: 00000000001606e0
+[53984.880194] Call Trace:
+[53984.880200]  kthread_stop+0x156/0x170
+[53984.880206]  cleanup_module+0x1a/0x2b [hello]
+[53984.880210]  ? __x64_sys_delete_module+0x13d/0x2a0
+[53984.880215]  ? exit_to_usermode_loop+0xc7/0x130
+[53984.880221]  ? do_syscall_64+0x5b/0x1c0
+[53984.880226]  ? entry_SYSCALL_64_after_hwframe+0x44/0xa9
+[53984.880230] ---[ end trace dbc9daae6a0de777 ]---
+[53984.880266] my thread is stop
+[53984.880267] Hello world module exit
+
