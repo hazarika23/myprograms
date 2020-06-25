@@ -11,7 +11,7 @@ int init_module(void)
 
 	spin_lock_init(&mysplock2);
 	spin_lock(&mysplock1);
-	spin_unlock(&mysplock1);
+
 	spin_lock(&mysplock2);
 	spin_unlock(&mysplock2);
 	return 0;
@@ -21,4 +21,9 @@ void cleanup_module(void)
 {
 	printk(KERN_INFO "Goodbye world\n");
 }
+
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("bikash.hazarika@gmail.com");
+MODULE_DESCRIPTION("spinlock test");
 

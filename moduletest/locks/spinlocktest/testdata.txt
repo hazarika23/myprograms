@@ -28,27 +28,24 @@ crash: invalid size request: -1060857876  type: "module gpl symbol strings"
       KERNEL: /usr/lib/debug/lib/modules/5.6.13-100.fc30.x86_64/vmlinux
     DUMPFILE: /proc/kcore
         CPUS: 4
-        DATE: Thu Jun 25 12:01:33 2020
-      UPTIME: 11:25:47
-LOAD AVERAGE: 0.74, 0.43, 0.31
-       TASKS: 709
+        DATE: Thu Jun 25 12:11:21 2020
+      UPTIME: 11:35:35
+LOAD AVERAGE: 0.59, 0.31, 0.28
+       TASKS: 703
     NODENAME: localhost.localdomain
      RELEASE: 5.6.13-100.fc30.x86_64
      VERSION: #1 SMP Fri May 15 00:36:06 UTC 2020
      MACHINE: x86_64  (1696 Mhz)
       MEMORY: 3.9 GB
-         PID: 7994
+         PID: 8542
      COMMAND: "crash"
-        TASK: ffffa04b7a09a680  [THREAD_INFO: ffffa04b7a09a680]
-         CPU: 1
+        TASK: ffffa04b815f4d00  [THREAD_INFO: ffffa04b815f4d00]
+         CPU: 2
        STATE: TASK_RUNNING (ACTIVE)
 
 crash> mod -s sptestmodule /home/bikash/test/myprograms/moduletest/locks/spinlocktest/sptestmodule.ko
      MODULE       NAME                        SIZE  OBJECT FILE
 ffffffffc0f78000  sptestmodule               16384  /home/bikash/test/myprograms/moduletest/locks/spinlocktest/sptestmodule.ko 
-crash> 
-crash> p mysptest1
-p: gdb request failed: p mysptest1
 crash> p mysplock1
 mysplock1 = $1 = {
   {
@@ -56,14 +53,14 @@ mysplock1 = $1 = {
       raw_lock = {
         {
           val = {
-            counter = 0
+            counter = 1
           }, 
           {
-            locked = 0 '\000', 
+            locked = 1 '\001', 
             pending = 0 '\000'
           }, 
           {
-            locked_pending = 0, 
+            locked_pending = 1, 
             tail = 0
           }
         }
@@ -94,3 +91,4 @@ mysplock2 = $2 = {
   }
 }
 crash> 
+
