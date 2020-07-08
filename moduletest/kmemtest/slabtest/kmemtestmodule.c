@@ -57,10 +57,11 @@ int createalist(int count)
 int destroylist(void) 
 {
 	static int count=0;
-	struct mydata *entry;	
-	list_for_each_entry(entry, &mylist_head, list) {
+	struct mydata *entry,*_entry;	
+	list_for_each_entry_safe(entry, _entry, &mylist_head, list) {
 		count++;
 		list_del(&entry->list);
+		kmem_cache_free(my_cacheptr,entry);
 	}
 	printk(KERN_INFO"Total node free %d\n",count);
 	return 0;
@@ -82,5 +83,6 @@ void cleanup_module(void)
 	printk(KERN_INFO "Goodbye world 1.\n");
 }
 
+MODULE_LICENSE("bikash.hazarika@gmail.com");
 //module_init(init_module);
 //module_exit(cleanup_module);
