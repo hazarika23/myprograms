@@ -1,0 +1,109 @@
+crash> 
+crash> dis -s destroylist
+FILE: /home/bikash/myprograms/moduletest/kmemtest/slabtest/kmemtestmodule.c
+LINE: 58
+
+  53            return 0;
+  54    }
+  55    
+  56    
+  57    int destroylist(void) 
+* 58    {
+  59            static int count=0;
+  60            struct mydata *entry;   
+  61            list_for_each_entry(entry, &mylist_head, list) {
+  62                    count++;
+  63                    list_del(&entry->list);
+  64            }
+  65            printk(KERN_INFO"Total node free %d\n",count);
+  66            return 0;
+  67    }
+
+crash> 
+crash> 
+crash> 
+crash> 
+crash> dis -l destroylist
+/home/bikash/myprograms/moduletest/kmemtest/slabtest/kmemtestmodule.c: 58
+0xffffffffc0e9a020 <destroylist>:       nopl   0x0(%rax,%rax,1) [FTRACE NOP]
+/home/bikash/myprograms/moduletest/kmemtest/slabtest/kmemtestmodule.c: 61
+0xffffffffc0e9a025 <destroylist+5>:     mov    0x2364(%rip),%rdi        # 0xffffffffc0e9c390 <mylist_head>
+0xffffffffc0e9a02c <destroylist+12>:    push   %r14
+0xffffffffc0e9a02e <destroylist+14>:    push   %r13
+0xffffffffc0e9a030 <destroylist+16>:    push   %r12
+0xffffffffc0e9a032 <destroylist+18>:    push   %rbp
+0xffffffffc0e9a033 <destroylist+19>:    push   %rbx
+0xffffffffc0e9a034 <destroylist+20>:    cmp    $0xffffffffc0e9c390,%rdi
+0xffffffffc0e9a03b <destroylist+27>:    je     0xffffffffc0e9a1d3 <destroylist.cold>
+0xffffffffc0e9a041 <destroylist+33>:    movabs $0xdead000000000100,%r12
+0xffffffffc0e9a04b <destroylist+43>:    lea    -0x8(%rdi),%rbx
+0xffffffffc0e9a04f <destroylist+47>:    movabs $0xdead000000000122,%r14
+0xffffffffc0e9a059 <destroylist+57>:    movabs $0xdead0000000000f8,%r13
+0xffffffffc0e9a063 <destroylist+67>:    mov    %r12,%rbp
+/home/bikash/myprograms/moduletest/kmemtest/slabtest/kmemtestmodule.c: 62
+0xffffffffc0e9a066 <destroylist+70>:    addl   $0x1,0x2333(%rip)        # 0xffffffffc0e9c3a0 <count.20274>
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/list.h: 146
+0xffffffffc0e9a06d <destroylist+77>:    callq  0xffffffff97509aa0 <__list_del_entry_valid>
+0xffffffffc0e9a072 <destroylist+82>:    test   %al,%al
+0xffffffffc0e9a074 <destroylist+84>:    je     0xffffffffc0e9a085 <destroylist+101>
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/list.h: 135
+0xffffffffc0e9a076 <destroylist+86>:    mov    0x8(%rbx),%rdx
+0xffffffffc0e9a07a <destroylist+90>:    mov    0x10(%rbx),%rax
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/list.h: 112
+0xffffffffc0e9a07e <destroylist+94>:    mov    %rax,0x8(%rdx)
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/compiler.h: 226
+0xffffffffc0e9a082 <destroylist+98>:    mov    %rdx,(%rax)
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/list.h: 147
+0xffffffffc0e9a085 <destroylist+101>:   mov    %r12,0x8(%rbx)
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/list.h: 148
+0xffffffffc0e9a089 <destroylist+105>:   mov    %rbp,%rdi
+0xffffffffc0e9a08c <destroylist+108>:   mov    %r14,0x10(%rbx)
+/home/bikash/myprograms/moduletest/kmemtest/slabtest/kmemtestmodule.c: 61
+0xffffffffc0e9a090 <destroylist+112>:   mov    %r13,%rbx
+0xffffffffc0e9a093 <destroylist+115>:   cmp    $0xffffffffc0e9c390,%rbp
+0xffffffffc0e9a09a <destroylist+122>:   je     0xffffffffc0e9a1d3 <destroylist.cold>
+0xffffffffc0e9a0a0 <destroylist+128>:   jmp    0xffffffffc0e9a066 <destroylist+70>
+crash>
+crash>
+crash>
+crash> dis -lx destroylist
+/home/bikash/myprograms/moduletest/kmemtest/slabtest/kmemtestmodule.c: 58
+0xffffffffc0e9a020 <destroylist>:       nopl   0x0(%rax,%rax,1) [FTRACE NOP]
+/home/bikash/myprograms/moduletest/kmemtest/slabtest/kmemtestmodule.c: 61
+0xffffffffc0e9a025 <destroylist+0x5>:   mov    0x2364(%rip),%rdi        # 0xffffffffc0e9c390 <mylist_head>
+0xffffffffc0e9a02c <destroylist+0xc>:   push   %r14
+0xffffffffc0e9a02e <destroylist+0xe>:   push   %r13
+0xffffffffc0e9a030 <destroylist+0x10>:  push   %r12
+0xffffffffc0e9a032 <destroylist+0x12>:  push   %rbp
+0xffffffffc0e9a033 <destroylist+0x13>:  push   %rbx
+0xffffffffc0e9a034 <destroylist+0x14>:  cmp    $0xffffffffc0e9c390,%rdi
+0xffffffffc0e9a03b <destroylist+0x1b>:  je     0xffffffffc0e9a1d3 <destroylist.cold>
+0xffffffffc0e9a041 <destroylist+0x21>:  movabs $0xdead000000000100,%r12
+0xffffffffc0e9a04b <destroylist+0x2b>:  lea    -0x8(%rdi),%rbx
+0xffffffffc0e9a04f <destroylist+0x2f>:  movabs $0xdead000000000122,%r14
+0xffffffffc0e9a059 <destroylist+0x39>:  movabs $0xdead0000000000f8,%r13
+0xffffffffc0e9a063 <destroylist+0x43>:  mov    %r12,%rbp
+/home/bikash/myprograms/moduletest/kmemtest/slabtest/kmemtestmodule.c: 62
+0xffffffffc0e9a066 <destroylist+0x46>:  addl   $0x1,0x2333(%rip)        # 0xffffffffc0e9c3a0 <count.20274>
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/list.h: 146
+0xffffffffc0e9a06d <destroylist+0x4d>:  callq  0xffffffff97509aa0 <__list_del_entry_valid>
+0xffffffffc0e9a072 <destroylist+0x52>:  test   %al,%al
+0xffffffffc0e9a074 <destroylist+0x54>:  je     0xffffffffc0e9a085 <destroylist+0x65>
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/list.h: 135
+0xffffffffc0e9a076 <destroylist+0x56>:  mov    0x8(%rbx),%rdx
+0xffffffffc0e9a07a <destroylist+0x5a>:  mov    0x10(%rbx),%rax
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/list.h: 112
+0xffffffffc0e9a07e <destroylist+0x5e>:  mov    %rax,0x8(%rdx)
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/compiler.h: 226
+0xffffffffc0e9a082 <destroylist+0x62>:  mov    %rdx,(%rax)
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/list.h: 147
+0xffffffffc0e9a085 <destroylist+0x65>:  mov    %r12,0x8(%rbx)
+/usr/src/kernels/5.6.13-100.fc30.x86_64/./include/linux/list.h: 148
+0xffffffffc0e9a089 <destroylist+0x69>:  mov    %rbp,%rdi
+0xffffffffc0e9a08c <destroylist+0x6c>:  mov    %r14,0x10(%rbx)
+/home/bikash/myprograms/moduletest/kmemtest/slabtest/kmemtestmodule.c: 61
+0xffffffffc0e9a090 <destroylist+0x70>:  mov    %r13,%rbx
+0xffffffffc0e9a093 <destroylist+0x73>:  cmp    $0xffffffffc0e9c390,%rbp
+0xffffffffc0e9a09a <destroylist+0x7a>:  je     0xffffffffc0e9a1d3 <destroylist.cold>
+0xffffffffc0e9a0a0 <destroylist+0x80>:  jmp    0xffffffffc0e9a066 <destroylist+0x46>
+crash>
