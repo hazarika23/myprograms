@@ -1,0 +1,41 @@
+[  387.357424] kmemtestmodule: module verification failed: signature and/or required key missing - tainting kernel
+[  387.357854] Creating memory cache
+[  387.357876] Creating link list
+[  387.357885] Hello world 1.
+[ 1693.601051] general protection fault, probably for non-canonical address 0xdead000000000100: 0000 [#1] SMP PTI
+[ 1693.601061] CPU: 2 PID: 4035 Comm: rmmod Tainted: P           OE     5.6.13-100.fc30.x86_64 #1
+[ 1693.601065] Hardware name: Dell Inc. Inspiron 3542/0KHNVP, BIOS A08 07/13/2015
+[ 1693.601074] RIP: 0010:__list_del_entry_valid+0x0/0x4c
+[ 1693.601079] Code: 0f 85 98 00 00 00 48 39 d7 0f 84 78 00 00 00 4c 39 cf 0f 84 6f 00 00 00 b8 01 00 00 00 c3 66 66 2e 0f 1f 84 00 00 00 00 00 90 <48> 8b 17 4c 8b 47 08 48 b8 00 01 00 00 00 00 ad de 48 39 c2 0f 84
+[ 1693.601083] RSP: 0018:ffffab0441b2bea8 EFLAGS: 00010202
+[ 1693.601088] RAX: ffffffffc0e9c390 RBX: dead0000000000f8 RCX: 0000000000000000
+[ 1693.601091] RDX: ffff891388f980c8 RSI: ffff891388f989c8 RDI: dead000000000100
+[ 1693.601094] RBP: dead000000000100 R08: ffffffffc0e9c390 R09: 0000000000000000
+[ 1693.601097] R10: 0000000000000000 R11: 0000000000000000 R12: dead000000000100
+[ 1693.601100] R13: dead0000000000f8 R14: dead000000000122 R15: 0000000000000000
+[ 1693.601104] FS:  00007f8af28432c0(0000) GS:ffff89139bb00000(0000) knlGS:0000000000000000
+[ 1693.601107] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 1693.601111] CR2: 00007f8af28a1660 CR3: 000000005925e001 CR4: 00000000001606e0
+[ 1693.601114] Call Trace:
+[ 1693.601126]  destroylist+0x52/0x90 [kmemtestmodule]
+[ 1693.601137]  ? cleanup_module+0xa/0x1d [kmemtestmodule]
+[ 1693.601144]  ? __x64_sys_delete_module+0x13d/0x2a0
+[ 1693.601152]  ? exit_to_usermode_loop+0xc7/0x130
+[ 1693.601159]  ? do_syscall_64+0x5b/0x1c0
+[ 1693.601167]  ? entry_SYSCALL_64_after_hwframe+0x44/0xa9
+[ 1693.601173] Modules linked in: kmemtestmodule(POE-) rfcomm fuse nf_conntrack_netbios_ns nf_conntrack_broadcast xt_CT ip6t_rpfilter ip6t_REJECT nf_reject_ipv6 ipt_REJECT nf_reject_ipv4 xt_conntrack ebtable_nat ip6table_nat ip6table_mangle ip6table_raw ip6table_security iptable_nat nf_nat iptable_mangle iptable_raw iptable_security nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 libcrc32c ccm ip_set nfnetlink ebtable_filter ebtables ip6table_filter ip6_tables iptable_filter ip_tables cmac bnep sunrpc vfat fat intel_rapl_msr intel_rapl_common x86_pkg_temp_thermal intel_powerclamp coretemp ath3k kvm_intel btusb btrtl btbcm btintel kvm bluetooth ath9k ath9k_common ath9k_hw irqbypass snd_hda_codec_realtek snd_hda_codec_generic snd_hda_codec_hdmi dell_laptop crct10dif_pclmul snd_hda_intel uvcvideo rtsx_usb_ms mac80211 crc32_pclmul snd_intel_dspcfg snd_hda_codec videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 ghash_clmulni_intel ledtrig_audio videobuf2_common intel_cstate ath intel_uncore
+[ 1693.601228]  snd_hda_core intel_rapl_perf cfg80211 pcspkr snd_hwdep dell_smm_hwmon ecdh_generic snd_seq ecc iTCO_wdt videodev iTCO_vendor_support mei_hdcp mc memstick snd_seq_device libarc4 snd_pcm wmi_bmof dell_wmi snd_timer joydev sparse_keymap snd dell_smbios dcdbas dell_wmi_descriptor soundcore i2c_i801 mei_me dell_rbtn dw_dmac mei lpc_ich rfkill binfmt_misc i915 i2c_algo_bit cec drm_kms_helper rtsx_usb_sdmmc mmc_core drm hid_rmi rtsx_usb rmi_core r8169 crc32c_intel serio_raw wmi video pinctrl_lynxpoint i2c_hid
+[ 1693.601302] ---[ end trace 9b7aaf5a4a6ea7fe ]---
+[ 1693.601308] RIP: 0010:__list_del_entry_valid+0x0/0x4c
+[ 1693.601312] Code: 0f 85 98 00 00 00 48 39 d7 0f 84 78 00 00 00 4c 39 cf 0f 84 6f 00 00 00 b8 01 00 00 00 c3 66 66 2e 0f 1f 84 00 00 00 00 00 90 <48> 8b 17 4c 8b 47 08 48 b8 00 01 00 00 00 00 ad de 48 39 c2 0f 84
+[ 1693.601315] RSP: 0018:ffffab0441b2bea8 EFLAGS: 00010202
+[ 1693.601319] RAX: ffffffffc0e9c390 RBX: dead0000000000f8 RCX: 0000000000000000
+[ 1693.601322] RDX: ffff891388f980c8 RSI: ffff891388f989c8 RDI: dead000000000100
+[ 1693.601325] RBP: dead000000000100 R08: ffffffffc0e9c390 R09: 0000000000000000
+[ 1693.601327] R10: 0000000000000000 R11: 0000000000000000 R12: dead000000000100
+[ 1693.601330] R13: dead0000000000f8 R14: dead000000000122 R15: 0000000000000000
+[ 1693.601334] FS:  00007f8af28432c0(0000) GS:ffff89139bb00000(0000) knlGS:0000000000000000
+[ 1693.601337] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 1693.601341] CR2: 00007f8af28a1660 CR3: 000000005925e001 CR4: 00000000001606e0
+[root@localhost bikash]# 
+
